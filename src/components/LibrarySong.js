@@ -27,7 +27,6 @@ const LibrarySong = ({
   return (
     <div
       className={`library-song ${selectedClass}`}
-      key={currentSong.id}
       onClick={songSelectHandler}
     >
       <img alt={currentSong.name} src={currentSong.cover}></img>

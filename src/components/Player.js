@@ -25,6 +25,7 @@ const Player = ({
   };
 
   const getTime = (time) => {
+    if (!time) return '00:00';
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor((time % 3600) / 60);
     const seconds = Math.round(time % 60);
@@ -50,7 +51,7 @@ const Player = ({
         <input
           type="range"
           min={0}
-          max={songInfo.duration}
+          max={songInfo.duration || 0}
           onChange={dragHandler}
           value={songInfo.currentTime}
         />
