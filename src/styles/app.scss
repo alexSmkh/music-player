@@ -14,10 +14,18 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+.App {
+  transition: all 0.5s ease;
+}
+
+.App.library-active {
+  margin-left: 30%;
+}
+
 h3,
 h4 {
   font-weight: 400;
-  color:rgb(100, 100, 100);
+  color: rgb(100, 100, 100);
 }
 
 @import "./song";
