@@ -12,10 +12,42 @@
   }
 
   h2 {
-    padding: 3rem 1rem 1rem;
+    padding: 3rem 1rem 1rem 1rem;
   }
 
   h3 {
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .song-container {
+    img {
+      width: 30%;
+    }
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .song-container {
+    img {
+      width: 35%;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .song-container {
+    img {
+      width: 40%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .song-container {
+    img {
+      width: 60%;
+    }
   }
 }
