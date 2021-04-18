@@ -15,6 +15,7 @@ const LibrarySong = ({
     if (isPlaying) {
       audioRef.current.play();
     }
+    
     const updatedSongs = songs.map((song) => {
       return {
         ...song,
