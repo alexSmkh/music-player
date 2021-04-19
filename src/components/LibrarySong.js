@@ -14,7 +14,7 @@ const LibrarySong = ({
 
   const songSelectHandler = async () => {
     await setCurrentSong(currentSong);
-    await setSongInfo({ ...songInfo, percentage: 0 });
+    // await setSongInfo({ ...songInfo, percentage: 0 });
 
     if (isPlaying) {
       audioRef.current.play();

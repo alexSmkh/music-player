@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -18,15 +18,22 @@ const Player = ({
   setCurrentSong,
   currentSong,
 }) => {
-  useEffect(() => {
+  const trackAnim = {
+    transform: `translateX(${songInfo.percentage}%)`,
+  };
+  const trackInputBackground = {
+    background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
+  };
+
+  const activeLibraryHandler = (nextSong) => {
     const updatedSongs = songs.map((song) => {
       return {
         ...song,
-        active: song.id === currentSong.id,
+        active: song.id === nextSong.id,
       };
     });
     setSongs(updatedSongs);
-  }, [currentSong]);
+  };
 
   const handlePlaySong = (event) => {
     if (isPlaying) {
@@ -54,8 +61,9 @@ const Player = ({
       }
     }
 
-    await setCurrentSong(songs[newSongIndex]);
-    await setSongInfo({...songInfo, percentage: 0});
+    const nextSong = songs[newSongIndex];
+    activeLibraryHandler(nextSong);
+    await setCurrentSong(nextSong);
     if (isPlaying) {
       audioRef.current.play();
     }
@@ -79,14 +87,6 @@ const Player = ({
     audioRef.current.currentTime = currentTime;
     setSongInfo({ ...songInfo, currentTime });
   };
-
-  const trackAnim = {
-    transform: `translateX(${songInfo.percentage}%)`
-  };
-
-  const trackInputBackground = {
-    background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
-  }
 
   return (
     <div className="player">

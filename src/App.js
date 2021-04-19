@@ -17,7 +17,7 @@ function App() {
     percentage: 0,
   });
   const audioRef = useRef(null);
-
+  console.log('apppp')
   const songEndedHandler = async () => {
     const currentSongIndex = songs.findIndex(
       (song) => song.id === currentSong.id
