@@ -7,14 +7,11 @@ const LibrarySong = ({
   setCurrentSong,
   audioRef,
   isPlaying,
-  setSongInfo,
-  songInfo,
 }) => {
   const selectedClass = currentSong.active ? "selected" : "";
 
   const songSelectHandler = async () => {
     await setCurrentSong(currentSong);
-    // await setSongInfo({ ...songInfo, percentage: 0 });
 
     if (isPlaying) {
       audioRef.current.play();
