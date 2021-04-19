@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
   faAngleLeft,
   faAngleRight,
   faPause,
+  faVolumeDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Player = ({
@@ -18,6 +19,7 @@ const Player = ({
   setCurrentSong,
   currentSong,
 }) => {
+  const [activeVolume, setActiveVolume] = useState(false);
   const trackAnim = {
     transform: `translateX(${songInfo.percentage}%)`,
   };
@@ -88,11 +90,21 @@ const Player = ({
     setSongInfo({ ...songInfo, currentTime });
   };
 
+  const changeVolume = (e) => {
+    const { value } = e.target;
+    console.log("clickckckc");
+    audioRef.current.volume = value;
+    setSongInfo({
+      ...songInfo,
+      volume: value,
+    });
+  };
+
   return (
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <div className="track" style={trackInputBackground}>
+        <div className="input-wrapper" style={trackInputBackground}>
           <input
             type="range"
             min={0}
@@ -100,7 +112,7 @@ const Player = ({
             onChange={dragHandler}
             value={songInfo.currentTime}
           />
-          <div className="animate-track" style={trackAnim}></div>
+          <div className="animate-input-wrapper" style={trackAnim}></div>
         </div>
         <p>{songInfo.duration ? getTime(songInfo.duration) : "00:00"}</p>
       </div>
@@ -123,6 +135,27 @@ const Player = ({
           size="2x"
           onClick={() => skipTrackHandler("skip-forward")}
         />
+        <FontAwesomeIcon
+          onClick={() => setActiveVolume(!activeVolume)}
+          icon={faVolumeDown}
+        />
+        {activeVolume && (
+          <div className="input-wrapper volume" style={trackInputBackground}>
+            <input
+              id="input"
+              onChange={changeVolume}
+              max="1"
+              min="0"
+              step="0.01"
+              type="range"
+              value={songInfo.volume}
+            />
+            <div
+              className="animate-input-wrapper"
+              style={{ transform: `translateX(${songInfo.volume * 100}%)` }}
+            ></div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -15,9 +15,10 @@ function App() {
     currentTime: 0,
     duration: null,
     percentage: 0,
+    volume: 0,
   });
   const audioRef = useRef(null);
-  console.log('apppp')
+
   const songEndedHandler = async () => {
     const currentSongIndex = songs.findIndex(
       (song) => song.id === currentSong.id
@@ -31,13 +32,14 @@ function App() {
   };
 
   const timeUpdateHandler = (e) => {
-    const { currentTime, duration } = e.target;
+    const { currentTime, duration, volume } = e.target;
     const updatedPercentage = Math.round((currentTime / duration) * 100);
     setSongInfo({
       ...songInfo,
       currentTime,
       duration,
       percentage: updatedPercentage,
+      volume,
     });
   };
 
